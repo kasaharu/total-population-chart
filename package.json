@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "format": "prettier --write './**/*.{ts,html,scss}'",
-    "format:check": "prettier --check './**/*.{ts,html,scss}'"
+    "format:check": "prettier --check './**/*.{ts,html,scss}'",
+    "deploy": "ng deploy --base-href=/total-population-chart/"
   },
   "private": true,
   "dependencies": {
