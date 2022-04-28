@@ -8,9 +8,8 @@ describe('TotalPopulationChartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TotalPopulationChartComponent ]
-    })
-    .compileComponents();
+      declarations: [TotalPopulationChartComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
