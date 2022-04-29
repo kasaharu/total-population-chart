@@ -1,1 +1,8 @@
-<p>ly-total-population-chart works!</p>
+<section>
+  <div class="label">都道府県</div>
+  <div class="contents">
+    <ng-container *ngFor="let prefecture of prefectures">
+      <div class="prefecture">{{ prefecture.prefName }}</div>
+    </ng-container>
+  </div>
+</section>
