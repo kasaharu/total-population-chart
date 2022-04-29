@@ -8,9 +8,8 @@ describe('PrefecturesFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PrefecturesFormComponent ]
-    })
-    .compileComponents();
+      declarations: [PrefecturesFormComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
