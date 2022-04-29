@@ -1333,6 +1333,13 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@ngneat/reactive-forms@^4.1.0":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@ngneat/reactive-forms/-/reactive-forms-4.1.0.tgz#29f4a00a4ce7f9299f621a0193aee7aead23c332"
+  integrity sha512-4uovdd5gzYaqOwGBYsJVmwDzQEyuyqsovO+G3MRx1Dylkh3FTUBs58xQ+65yOliSHXDRph3DeFE8VxSm4vnhug==
+  dependencies:
+    tslib "^2.3.0"
+
 "@ngrx/component-store@^13.1.0":
   version "13.1.0"
   resolved "https://registry.yarnpkg.com/@ngrx/component-store/-/component-store-13.1.0.tgz#67d3e8ef4f9476521fe7ad2d8a64a130be0580bb"
