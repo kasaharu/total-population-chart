@@ -8,8 +8,11 @@ import { TotalPopulationChartUsecase } from './total-population-chart.usecase';
   providers: [TotalPopulationChartUsecase],
 })
 export class TotalPopulationChartComponent implements OnInit {
-  constructor() {}
+  constructor(private _usecase: TotalPopulationChartUsecase) {}
 
-  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
-  ngOnInit(): void {}
+  prefectures$ = this._usecase.prefectures$;
+
+  ngOnInit(): void {
+    this._usecase.fetchPrefectures();
+  }
 }
