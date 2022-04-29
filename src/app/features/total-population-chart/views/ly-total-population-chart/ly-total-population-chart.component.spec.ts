@@ -8,9 +8,8 @@ describe('LyTotalPopulationChartComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LyTotalPopulationChartComponent ]
-    })
-    .compileComponents();
+      declarations: [LyTotalPopulationChartComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
