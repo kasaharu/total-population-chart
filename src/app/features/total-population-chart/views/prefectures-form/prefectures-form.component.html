@@ -1,1 +1,7 @@
-<p>prefectures-form works!</p>
+<form [formGroup]="formGroup">
+  <div class="checkboxes" formArrayName="checkboxes">
+    <div class="prefecture" *ngFor="let checkbox of checkboxes.controls; let i = index">
+      <input type="checkbox" [formControlName]="i" (change)="onChange()" /> {{ getPrefectureName(i) }}
+    </div>
+  </div>
+</form>
