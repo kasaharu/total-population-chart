@@ -5,7 +5,9 @@ describe('TotalPopulationChartUsecase', () => {
   let usecase: TotalPopulationChartUsecase;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [TotalPopulationChartUsecase],
+    });
     usecase = TestBed.inject(TotalPopulationChartUsecase);
   });
 
