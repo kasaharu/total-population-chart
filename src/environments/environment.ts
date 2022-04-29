@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  apiEndpoint: 'https://opendata.resas-portal.go.jp',
 };
 
 /*
