@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Prefecture } from '../../../../domain/prefecture';
 
@@ -10,6 +10,7 @@ import { Prefecture } from '../../../../domain/prefecture';
 export class PrefecturesFormComponent implements OnChanges {
   constructor() {}
   @Input() prefectures: Prefecture[] | null = null;
+  @Output() prefChecked = new EventEmitter<Prefecture[]>();
 
   formGroup = new FormGroup({ checkboxes: new FormArray([]) });
 
@@ -43,5 +44,7 @@ export class PrefecturesFormComponent implements OnChanges {
         checkedBox.push(this.prefectures[index]);
       }
     });
+
+    this.prefChecked.emit(checkedBox);
   }
 }

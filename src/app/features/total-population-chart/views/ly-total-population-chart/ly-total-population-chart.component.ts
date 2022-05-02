@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Prefecture } from '../../../../domain/prefecture';
 
 @Component({
@@ -10,4 +10,9 @@ export class LyTotalPopulationChartComponent {
   constructor() {}
 
   @Input() prefectures: Prefecture[] | null = null;
+  @Output() prefSelected = new EventEmitter<Prefecture[]>();
+
+  selectPref(prefectures: Prefecture[]) {
+    this.prefSelected.emit(prefectures);
+  }
 }

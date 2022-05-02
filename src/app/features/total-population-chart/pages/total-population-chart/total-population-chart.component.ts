@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Prefecture } from '../../../../domain/prefecture';
 import { TotalPopulationChartUsecase } from './total-population-chart.usecase';
 
 @Component({
@@ -14,5 +15,9 @@ export class TotalPopulationChartComponent implements OnInit {
 
   ngOnInit(): void {
     this._usecase.fetchPrefectures();
+  }
+
+  notifySelectedPrefectures(prefectures: Prefecture[]): void {
+    console.log(prefectures);
   }
 }

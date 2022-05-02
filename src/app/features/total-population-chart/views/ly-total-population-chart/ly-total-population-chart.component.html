@@ -1,4 +1,4 @@
 <section>
   <div class="label">都道府県</div>
-  <app-prefectures-form [prefectures]="prefectures"></app-prefectures-form>
+  <app-prefectures-form [prefectures]="prefectures" (prefChecked)="selectPref($event)"></app-prefectures-form>
 </section>
