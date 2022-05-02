@@ -22,10 +22,7 @@ describe('PopulationCompositionApi', () => {
     const prefCode = 1;
     const populationComposition: PopulationComposition = {
       boundaryYear: 2022,
-      data: {
-        label: 'test',
-        data: [{ year: 2022, value: 1 }],
-      },
+      data: [{ label: 'test', data: [{ year: 2022, value: 1 }] }],
     };
     const response = {
       result: populationComposition,

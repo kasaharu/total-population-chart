@@ -8,5 +8,5 @@ export interface PopulationComposition {
   data: {
     label: string;
     data: PerYear[];
-  };
+  }[];
 }
