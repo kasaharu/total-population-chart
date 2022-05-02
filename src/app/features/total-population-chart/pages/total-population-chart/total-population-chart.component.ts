@@ -18,6 +18,6 @@ export class TotalPopulationChartComponent implements OnInit {
   }
 
   notifySelectedPrefectures(prefectures: Prefecture[]): void {
-    console.log(prefectures);
+    this._usecase.fetchPopulationComposition(prefectures);
   }
 }
