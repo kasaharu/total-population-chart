@@ -24,34 +24,37 @@ export class LineChartComponent implements OnChanges {
     }
 
     if (this.populationComposition !== null) {
-      console.log(this.populationComposition);
-      this.drawLine(this.populationComposition[0]);
+      this.drawChart(this.populationComposition[0]);
     }
   }
 
-  drawLine(data: PerYear[]): void {
+  drawChart(data: PerYear[]): void {
     this.svg.selectAll('path').remove();
     this.svg.selectAll('g').remove();
 
     const xScale = d3.scaleLinear().domain(this.xDomain(data)).range([0, this.width]);
     const yScale = d3.scaleLinear().domain(this.yDomain(data)).range([this.height, 0]);
-    const line = d3
-      .line<PerYear>()
-      .x((d) => xScale(d.year))
-      .y((d) => yScale(d.value));
 
-    this.svg
-      .append('path')
-      .attr('d', line(data))
-      .attr('fill', 'none')
-      .attr('stroke', 'blue')
-      .attr('transform', `translate(${this.axisWidth}, 0)`);
+    this.drawLine(xScale, yScale, data);
 
     // NOTE: 軸の描画
     const xAxis = d3.axisBottom(xScale);
     const yAxis = d3.axisLeft(yScale);
     this.svg.append('g').attr('transform', `translate(${this.axisWidth}, ${this.height})`).call(xAxis);
     this.svg.append('g').attr('transform', `translate(${this.axisWidth}, 0)`).call(yAxis);
+  }
+
+  drawLine(xScale: d3.ScaleLinear<number, number, never>, yScale: d3.ScaleLinear<number, number, never>, data: PerYear[]): void {
+    const line = d3
+      .line<PerYear>()
+      .x((d) => xScale(d.year))
+      .y((d) => yScale(d.value));
+    this.svg
+      .append('path')
+      .attr('d', line(data))
+      .attr('fill', 'none')
+      .attr('stroke', 'blue')
+      .attr('transform', `translate(${this.axisWidth}, 0)`);
   }
 
   // NOTE: x 軸の範囲を決める
