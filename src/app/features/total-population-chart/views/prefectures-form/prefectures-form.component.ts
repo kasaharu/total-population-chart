@@ -47,4 +47,10 @@ export class PrefecturesFormComponent implements OnChanges {
 
     this.prefChecked.emit(checkedBox);
   }
+
+  isDisabled(i: number): boolean {
+    const checkboxes: boolean[] = this.formGroup.value.checkboxes;
+    const checkedLength = checkboxes.filter((value) => value === true).length;
+    return checkedLength >= 10 && !checkboxes[i];
+  }
 }

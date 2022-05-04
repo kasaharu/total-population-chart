@@ -1,7 +1,8 @@
 <form [formGroup]="formGroup">
   <div class="checkboxes" formArrayName="checkboxes">
     <div class="prefecture" *ngFor="let checkbox of checkboxes.controls; let i = index">
-      <input type="checkbox" [formControlName]="i" (change)="onChange()" /> {{ getPrefectureName(i) }}
+      <input type="checkbox" [formControlName]="i" (change)="onChange()" [attr.disabled]="isDisabled(i) ? true : null" />
+      {{ getPrefectureName(i) }}
     </div>
   </div>
 </form>
