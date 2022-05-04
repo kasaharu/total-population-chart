@@ -24,18 +24,20 @@ export class LineChartComponent implements OnChanges {
     }
 
     if (this.populationComposition !== null) {
-      this.drawChart(this.populationComposition[0]);
+      this.drawChart(this.populationComposition);
     }
   }
 
-  drawChart(data: PerYear[]): void {
+  drawChart(data: PerYear[][]): void {
     this.svg.selectAll('path').remove();
     this.svg.selectAll('g').remove();
 
     const xScale = d3.scaleLinear().domain(this.xDomain(data)).range([0, this.width]);
     const yScale = d3.scaleLinear().domain(this.yDomain(data)).range([this.height, 0]);
 
-    this.drawLine(xScale, yScale, data);
+    data.forEach((d, i) => {
+      this.drawLine(xScale, yScale, d, i);
+    });
 
     // NOTE: 軸の描画
     const xAxis = d3.axisBottom(xScale);
@@ -44,7 +46,13 @@ export class LineChartComponent implements OnChanges {
     this.svg.append('g').attr('transform', `translate(${this.axisWidth}, 0)`).call(yAxis);
   }
 
-  drawLine(xScale: d3.ScaleLinear<number, number, never>, yScale: d3.ScaleLinear<number, number, never>, data: PerYear[]): void {
+  drawLine(
+    xScale: d3.ScaleLinear<number, number, never>,
+    yScale: d3.ScaleLinear<number, number, never>,
+    data: PerYear[],
+    index: number,
+  ): void {
+    const colors = ['blue', 'green', 'purple', 'royalblue', 'red', 'cyan', 'magenta', 'silver', 'olive', 'navy'];
     const line = d3
       .line<PerYear>()
       .x((d) => xScale(d.year))
@@ -53,13 +61,14 @@ export class LineChartComponent implements OnChanges {
       .append('path')
       .attr('d', line(data))
       .attr('fill', 'none')
-      .attr('stroke', 'blue')
+      .attr('stroke', colors[index])
       .attr('transform', `translate(${this.axisWidth}, 0)`);
   }
 
   // NOTE: x 軸の範囲を決める
-  xDomain(data: PerYear[]): number[] {
-    const yearList = data.map((d) => d.year);
+  xDomain(data: PerYear[][]): number[] {
+    const flatten = data.flat();
+    const yearList = flatten.map((d) => d.year);
     const max = Math.max(...yearList);
     const min = Math.min(...yearList);
 
@@ -67,8 +76,9 @@ export class LineChartComponent implements OnChanges {
   }
 
   // NOTE: y 軸の範囲を決める
-  yDomain(data: PerYear[]): number[] {
-    const valueList = data.map((d) => d.value);
+  yDomain(data: PerYear[][]): number[] {
+    const flatten = data.flat();
+    const valueList = flatten.map((d) => d.value);
     const max = Math.max(...valueList);
     const digit = String(max).length;
 
