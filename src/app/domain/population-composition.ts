@@ -12,7 +12,7 @@ export interface PopulationComposition {
 }
 
 // NOTE: 総人口の dummy data を用意
-export const dummyTotalPopulation = [
+export const dummyTotalPopulation: PerYear[] = [
   { year: 1960, value: 2430871 },
   { year: 1965, value: 3014983 },
   { year: 1970, value: 3866472 },
