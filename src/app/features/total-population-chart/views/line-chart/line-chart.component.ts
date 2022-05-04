@@ -13,6 +13,7 @@ export class LineChartComponent implements OnChanges {
   width = 500;
   height = 500;
   axisWidth = 100;
+  axisHeight = 20;
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['populationComposition'].firstChange) {
@@ -20,7 +21,7 @@ export class LineChartComponent implements OnChanges {
         .select('#line-chart')
         .append('svg')
         .attr('width', this.width + this.axisWidth)
-        .attr('height', this.height + 50);
+        .attr('height', this.height + 100 + this.axisHeight);
     }
 
     if (this.populationComposition !== null) {
@@ -33,7 +34,10 @@ export class LineChartComponent implements OnChanges {
     this.svg.selectAll('g').remove();
 
     const xScale = d3.scaleLinear().domain(this.xDomain(data)).range([0, this.width]);
-    const yScale = d3.scaleLinear().domain(this.yDomain(data)).range([this.height, 0]);
+    const yScale = d3
+      .scaleLinear()
+      .domain(this.yDomain(data))
+      .range([this.height + this.axisHeight, 0]);
 
     data.forEach((d, i) => {
       this.drawLine(xScale, yScale, d, i);
@@ -42,8 +46,11 @@ export class LineChartComponent implements OnChanges {
     // NOTE: 軸の描画
     const xAxis = d3.axisBottom(xScale);
     const yAxis = d3.axisLeft(yScale);
-    this.svg.append('g').attr('transform', `translate(${this.axisWidth}, ${this.height})`).call(xAxis);
-    this.svg.append('g').attr('transform', `translate(${this.axisWidth}, 0)`).call(yAxis);
+    this.svg
+      .append('g')
+      .attr('transform', `translate(${this.axisWidth}, ${this.height + this.axisHeight + 20})`)
+      .call(xAxis);
+    this.svg.append('g').attr('transform', `translate(${this.axisWidth}, ${this.axisHeight})`).call(yAxis);
   }
 
   drawLine(
@@ -62,7 +69,7 @@ export class LineChartComponent implements OnChanges {
       .attr('d', line(data))
       .attr('fill', 'none')
       .attr('stroke', colors[index])
-      .attr('transform', `translate(${this.axisWidth}, 0)`);
+      .attr('transform', `translate(${this.axisWidth}, ${this.axisHeight})`);
   }
 
   // NOTE: x 軸の範囲を決める
