@@ -20,16 +20,17 @@ describe('PopulationCompositionApi', () => {
 
   it('getPopulationComposition()', () => {
     const prefCode = 1;
+    const perYear = [{ year: 2022, value: 1 }];
     const populationComposition: PopulationComposition = {
       boundaryYear: 2022,
-      data: [{ label: 'test', data: [{ year: 2022, value: 1 }] }],
+      data: [{ label: 'test', data: perYear }],
     };
     const response = {
       result: populationComposition,
     };
 
     api.getPopulationComposition(prefCode).subscribe((resp) => {
-      expect(resp).toEqual(populationComposition);
+      expect(resp).toEqual(perYear);
     });
 
     const req = httpTestingController.expectOne(

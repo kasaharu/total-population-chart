@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { PopulationComposition } from '../../../../domain/population-composition';
+import { PerYear } from '../../../../domain/population-composition';
 import { Prefecture } from '../../../../domain/prefecture';
 
 @Component({
@@ -11,7 +11,7 @@ export class LyTotalPopulationChartComponent {
   constructor() {}
 
   @Input() prefectures: Prefecture[] | null = null;
-  @Input() populationComposition: PopulationComposition | null = null;
+  @Input() populationComposition: PerYear[][] | null = null;
   @Output() prefSelected = new EventEmitter<Prefecture[]>();
 
   selectPref(prefectures: Prefecture[]) {
