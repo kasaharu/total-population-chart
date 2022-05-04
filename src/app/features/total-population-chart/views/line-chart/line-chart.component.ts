@@ -17,12 +17,12 @@ export class LineChartComponent implements OnInit {
   drawLine(data: PerYear[]): void {
     const width = 500;
     const height = 500;
-    const legendWidth = 100;
+    const axisWidth = 100;
 
     const svg = d3
       .select('#line-chart')
       .append('svg')
-      .attr('width', width + legendWidth)
+      .attr('width', width + axisWidth)
       .attr('height', height + 50);
 
     const xScale = d3.scaleLinear().domain(this.xDomain(data)).range([0, width]);
@@ -32,13 +32,13 @@ export class LineChartComponent implements OnInit {
       .x((d) => xScale(d.year))
       .y((d) => yScale(d.value));
 
-    svg.append('path').attr('d', line(data)).attr('fill', 'none').attr('stroke', 'blue').attr('transform', `translate(${legendWidth}, 0)`);
+    svg.append('path').attr('d', line(data)).attr('fill', 'none').attr('stroke', 'blue').attr('transform', `translate(${axisWidth}, 0)`);
 
-    // 凡例
+    // NOTE: 軸の描画
     const xAxis = d3.axisBottom(xScale);
     const yAxis = d3.axisLeft(yScale);
-    svg.append('g').attr('transform', `translate(${legendWidth}, ${height})`).call(xAxis);
-    svg.append('g').attr('transform', `translate(${legendWidth}, 0)`).call(yAxis);
+    svg.append('g').attr('transform', `translate(${axisWidth}, ${height})`).call(xAxis);
+    svg.append('g').attr('transform', `translate(${axisWidth}, 0)`).call(yAxis);
   }
 
   // NOTE: x 軸の範囲を決める
