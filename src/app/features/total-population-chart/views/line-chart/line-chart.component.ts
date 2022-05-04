@@ -1,17 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import * as d3 from 'd3';
-import { dummyTotalPopulation, PerYear } from '../../../../domain/population-composition';
+import { dummyTotalPopulation, PerYear, PopulationComposition } from '../../../../domain/population-composition';
 
 @Component({
   selector: 'app-line-chart',
   templateUrl: './line-chart.component.html',
   styleUrls: ['./line-chart.component.scss'],
 })
-export class LineChartComponent implements OnInit {
+export class LineChartComponent implements OnChanges {
   totalPopulation = [...dummyTotalPopulation];
+  @Input() populationComposition: PopulationComposition | null = null;
 
-  ngOnInit(): void {
-    this.drawLine(this.totalPopulation);
+  ngOnChanges(): void {
+    if (this.populationComposition !== null) {
+      console.log(this.populationComposition.data[0].data);
+      this.drawLine(this.populationComposition.data[0].data);
+    }
   }
 
   drawLine(data: PerYear[]): void {

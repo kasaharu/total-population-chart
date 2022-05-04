@@ -36,6 +36,6 @@ export class TotalPopulationChartUsecase extends ComponentStore<TotalPopulationC
     }
     const p = prefectures[0];
     const populationComposition = await lastValueFrom(this._populationCompositionApi.getPopulationComposition(p.prefCode));
-    console.log(populationComposition);
+    this.savePopulationComposition(populationComposition);
   }
 }

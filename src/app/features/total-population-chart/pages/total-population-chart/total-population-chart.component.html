@@ -1,4 +1,5 @@
 <app-ly-total-population-chart
   [prefectures]="prefectures$ | async"
+  [populationComposition]="populationComposition$ | async"
   (prefSelected)="notifySelectedPrefectures($event)"
 ></app-ly-total-population-chart>

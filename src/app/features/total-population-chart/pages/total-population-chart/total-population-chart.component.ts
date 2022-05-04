@@ -12,13 +12,13 @@ export class TotalPopulationChartComponent implements OnInit {
   constructor(private _usecase: TotalPopulationChartUsecase) {}
 
   prefectures$ = this._usecase.prefectures$;
+  populationComposition$ = this._usecase.populationComposition$;
 
   ngOnInit(): void {
-    console.log();
-    // this._usecase.fetchPrefectures();
+    this._usecase.fetchPrefectures();
   }
 
   notifySelectedPrefectures(prefectures: Prefecture[]): void {
-    // this._usecase.fetchPopulationComposition(prefectures);
+    this._usecase.fetchPopulationComposition(prefectures);
   }
 }
