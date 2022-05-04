@@ -25,8 +25,8 @@ export class LineChartComponent implements OnInit {
       .attr('width', width + legendWidth)
       .attr('height', height + 50);
 
-    const xScale = d3.scaleLinear().domain([1960, 2045]).range([0, width]);
-    const yScale = d3.scaleLinear().domain([0, 7500000]).range([height, 0]);
+    const xScale = d3.scaleLinear().domain(this.xDomain(data)).range([0, width]);
+    const yScale = d3.scaleLinear().domain(this.yDomain(data)).range([height, 0]);
     const line = d3
       .line<PerYear>()
       .x((d) => xScale(d.year))
@@ -39,5 +39,24 @@ export class LineChartComponent implements OnInit {
     const yAxis = d3.axisLeft(yScale);
     svg.append('g').attr('transform', `translate(${legendWidth}, ${height})`).call(xAxis);
     svg.append('g').attr('transform', `translate(${legendWidth}, 0)`).call(yAxis);
+  }
+
+  // NOTE: x 軸の範囲を決める
+  xDomain(data: PerYear[]): number[] {
+    const yearList = data.map((d) => d.year);
+    const max = Math.max(...yearList);
+    const min = Math.min(...yearList);
+
+    return [min, max];
+  }
+
+  // NOTE: y 軸の範囲を決める
+  yDomain(data: PerYear[]): number[] {
+    const valueList = data.map((d) => d.value);
+    const max = Math.max(...valueList);
+    const digit = String(max).length;
+
+    const signDigit = 10 ** (digit - 2);
+    return [0, Math.round(max / signDigit) * signDigit + 5 * signDigit];
   }
 }
