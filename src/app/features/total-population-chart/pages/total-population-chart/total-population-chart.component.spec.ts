@@ -1,3 +1,4 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { PopulationCompositionApi } from '../../../../infrastructures/api/population-composition.api';
 import { PrefectureApi } from '../../../../infrastructures/api/prefecture.api';
@@ -23,6 +24,7 @@ describe('TotalPopulationChartComponent', () => {
         { provide: PrefectureApi, useClass: MockPrefectureApi },
         { provide: PopulationCompositionApi, useClass: MockPopulationCompositionApi },
       ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
       .overrideComponent(TotalPopulationChartComponent, {
         add: { providers: [TotalPopulationChartUsecase] },
