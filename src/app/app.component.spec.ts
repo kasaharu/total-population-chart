@@ -5,6 +5,6 @@ describe('AppComponent', () => {
   it('should render counter', async () => {
     await render(AppComponent);
 
-    expect(screen.getByText('total-population-chart')).toBeTruthy();
+    expect(screen.getByRole('heading', { name: 'total-population-chart' })).toBeTruthy();
   });
 });
