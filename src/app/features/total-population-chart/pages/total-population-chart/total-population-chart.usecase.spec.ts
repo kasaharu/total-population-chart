@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
+import { PerYear } from '../../../../domain/population-composition';
 import { Prefecture } from '../../../../domain/prefecture';
 import { PopulationCompositionApi } from '../../../../infrastructures/api/population-composition.api';
 import { PrefectureApi } from '../../../../infrastructures/api/prefecture.api';
@@ -44,6 +45,28 @@ describe('TotalPopulationChartUsecase', () => {
       await usecase.fetchPrefectures();
 
       expect(usecase.savePrefectures).toHaveBeenCalledWith(prefectures);
+    });
+  });
+
+  describe('fetchPopulationComposition()', () => {
+    it('引数の prefectures が空配列の場合、何も実行されないこと', async () => {
+      const prefectures: Prefecture[] = [];
+      spyOn(usecase, 'savePopulationComposition');
+
+      await usecase.fetchPopulationComposition(prefectures);
+
+      expect(usecase.savePopulationComposition).not.toHaveBeenCalled();
+    });
+
+    it('引数の prefectures が空配列でない場合、usecase.savePopulationComposition が実行されること', async () => {
+      const prefectures: Prefecture[] = [{ prefCode: 1, prefName: '東京都' }];
+      const perYear: PerYear[] = [{ year: 2020, value: 1000 }];
+      spyOn(populationCompositionApi, 'getPopulationComposition').and.returnValue(of(perYear));
+      spyOn(usecase, 'savePopulationComposition');
+
+      await usecase.fetchPopulationComposition(prefectures);
+
+      expect(usecase.savePopulationComposition).toHaveBeenCalledWith([perYear]);
     });
   });
 });
