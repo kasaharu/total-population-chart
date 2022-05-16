@@ -34,13 +34,10 @@ export class TotalPopulationChartUsecase extends ComponentStore<TotalPopulationC
     if (prefectures.length === 0) {
       return;
     }
-    console.log('usecase - fetchPopulationComposition: ');
-    console.log(prefectures);
 
     const results = await Promise.all(
       prefectures.map((p) => lastValueFrom(this._populationCompositionApi.getPopulationComposition(p.prefCode))),
     );
-    console.log(results);
     this.savePopulationComposition(results);
   }
 }
