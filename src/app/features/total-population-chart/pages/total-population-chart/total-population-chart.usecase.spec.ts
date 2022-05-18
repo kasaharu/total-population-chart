@@ -32,10 +32,6 @@ describe('TotalPopulationChartUsecase', () => {
     populationCompositionApi = TestBed.inject(PopulationCompositionApi);
   });
 
-  it('should be created', () => {
-    expect(usecase).toBeTruthy();
-  });
-
   describe('savePrefectures', () => {
     it('usecase.prefectures$ に更新した prefectures になっていること', () => {
       const prefectures: Prefecture[] = [{ prefCode: 1, prefName: '東京都' }];
