@@ -47,6 +47,17 @@ describe('TotalPopulationChartUsecase', () => {
     });
   });
 
+  describe('savePopulationComposition', () => {
+    it('usecase.populationComposition$ に更新した populationComposition になっていること', () => {
+      const populationComposition: PerYear[][] = [[{ year: 2020, value: 1000 }]];
+      usecase.savePopulationComposition(populationComposition);
+
+      usecase.populationComposition$.subscribe((val) => {
+        expect(val).toEqual(populationComposition);
+      });
+    });
+  });
+
   describe('fetchPrefectures()', () => {
     it('usecase.savePrefectures() が呼ばれること', async () => {
       const prefectures: Prefecture[] = [];
