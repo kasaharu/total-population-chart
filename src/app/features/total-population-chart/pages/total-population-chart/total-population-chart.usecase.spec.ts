@@ -36,6 +36,17 @@ describe('TotalPopulationChartUsecase', () => {
     expect(usecase).toBeTruthy();
   });
 
+  describe('savePrefectures', () => {
+    it('usecase.prefectures$ に更新した prefectures になっていること', () => {
+      const prefectures: Prefecture[] = [{ prefCode: 1, prefName: '東京都' }];
+      usecase.savePrefectures(prefectures);
+
+      usecase.prefectures$.subscribe((val) => {
+        expect(val).toEqual(prefectures);
+      });
+    });
+  });
+
   describe('fetchPrefectures()', () => {
     it('usecase.savePrefectures() が呼ばれること', async () => {
       const prefectures: Prefecture[] = [];
