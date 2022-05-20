@@ -29,4 +29,24 @@ describe('PrefecturesFormComponent', () => {
       expect(component.checkboxes.value).toEqual(expected);
     });
   });
+
+  describe('getPrefectureName()', () => {
+    it('prefectures が null のとき、空文字が返ること', async () => {
+      const prefectures = null;
+      const { fixture } = await render(PrefecturesFormComponent, { imports: [ReactiveFormsModule], componentProperties: { prefectures } });
+      const component = fixture.componentInstance;
+
+      const result = component.getPrefectureName(0);
+      expect(result).toBe('');
+    });
+
+    it('prefectures が null でないとき、対象の prefName が返ること', async () => {
+      const prefectures: Prefecture[] = [{ prefCode: 1, prefName: '東京都' }];
+      const { fixture } = await render(PrefecturesFormComponent, { imports: [ReactiveFormsModule], componentProperties: { prefectures } });
+      const component = fixture.componentInstance;
+
+      const result = component.getPrefectureName(0);
+      expect(result).toBe('東京都');
+    });
+  });
 });
